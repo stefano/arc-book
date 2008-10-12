@@ -1,5 +1,7 @@
 
 Table of Contents
 
+License of the Arc-F Arc Book..........................................LICENSE
+
 Scanners and Sequences..............................scanners-and-sequences.txt
 
