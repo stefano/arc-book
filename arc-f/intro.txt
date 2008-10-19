@@ -1,0 +1,83 @@
+
+
+Introduction to Arc-F
+=====================
+
+Arc-F is a variant of Arc which includes some features to improve
+the usability of Arc.  In particular, it is an attempt to make
+the creation of shareable libraries easier - and in particular,
+to ensure that libraries are *interoperable*.
+
+Arc-F was started by Alan Manuel K. Gloria, and initially
+released as Arc3F in [early October 2008][1].
+
+Some of the additional features include:
+
+1.  A symbol-based package system, slightly similar to the Common
+    Lisp packages.
+2.  CLOS-style multimethods, dispatching by the types of any
+    argument or combination of arguments.  **Note** as of Arc3F
+    only dispatching by the type of the first argument is
+    supported; full multimethods are planned for a future version
+    of Arc-F.
+3.  A redesigned `arc.arc` base, which includes more hooks for
+    extending the base system in conjunction with the other
+    additional features.
+4.  Allow more user-definable stuff, such as callable
+    non-function objects (similar to the Anarki feature).
+
+<!--Links-->
+[1]: <http://arclanguage.com/item?id=8270>
+     "Arc Forum | Arc3F released..."
+
+
+Primary Design Goal
+-------------------
+
+Arc-F has one overarching design goal: to make libraries
+interoperable.  By this, we mean that some design decisions are
+slanted towards allowing discrete libraries, written by diverse
+people, to operate in the same Arc environment, and to allow
+libraries to extend features of other libraries without
+inadvertently breaking the extensions created by even other
+libraries (or at least, to make a best effort to do so).
+
+Aside from actual design decisions, many of the features and
+idioms that are encouraged in Arc-F are slanted towards making
+libraries interoperable.
+
+Arc is a Lisp, and as such has a large amount of flexibility,
+particularly when we begin doing some serious hacking using the
+macro system and higher-order functions.  Effort has been
+expended, however, to try to keep new things from overwhelming the
+language.  For example, while Clojure-style multimethods are neat
+and very general, as well as being very easy to implement, they do
+not encourage library interoperability as much as CLOS-style
+multimethods do (a chapter in this book will discuss this);
+although still provided, it is recommended that they be used
+either for applications, for those parts of a library that will
+never have to be seriously extended, or with some sort of limiting
+wrapper within your library.
+
+
+Redesigned Arc Prelude: Because `arc.arc` is a Library Too!
+-----------------------------------------------------------
+
+Aside from extending Arc, Arc-F includes a redesigned `arc.arc`;
+the redesign incorporates many of Arc-F's extensions.  This
+encourages you to use Arc-F's extensions in order to also extend
+the "built-in" Arc functions and macroforms.
+
+Many of the built-in functions and macroforms can be extended to
+make use of your own data types; existing generic functions which
+use those built-in functions and macroforms will then work on
+your new data type.  For example, you can develop a sequence type
+which will work seamlessly with the Arc `each` macro.
+
+By proper use of Arc-F's extensions, you can create a uniform
+method of defining an algorithm; the redesigned `arc.arc` is, by
+itself, a demonstration of this feature.
+
+
+
+
